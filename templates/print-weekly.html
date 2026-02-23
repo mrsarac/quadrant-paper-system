@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Weekly Paper Template — Quadrant Paper System</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap');
+  @page { margin: 1cm; size: A4; }
+  body { margin: 0; font-family: 'Caveat', cursive; color: #333; }
+  .page {
+    width: 190mm; height: 277mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    border: 1px solid #ccc;
+    position: relative;
+  }
+  .page::before {
+    content: ''; position: absolute;
+    top: 50%; left: 2%; right: 2%;
+    border-top: 1px dashed #bbb;
+  }
+  .page::after {
+    content: ''; position: absolute;
+    left: 50%; top: 2%; bottom: 2%;
+    border-left: 1px dashed #bbb;
+  }
+  .q { padding: 12mm 8mm; position: relative; z-index: 1; }
+  .q h2 { font-size: 18pt; margin: 0 0 6mm; color: #555; }
+  .q .lines { margin-top: 4mm; }
+  .q .line {
+    border-bottom: 1px solid #e5e5e5;
+    height: 9mm;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 1mm;
+    color: #ccc;
+    font-size: 10pt;
+  }
+  .q .line.bullet::before { content: '•  '; }
+  .q .line.check::before { content: '☐  '; }
+  .q .line.num { counter-increment: item; }
+  .q .line.num::before { content: counter(item) '.  '; }
+  .q { counter-reset: item; }
+  .corner {
+    position: absolute; top: 4mm; right: 6mm;
+    font-size: 10pt; color: #bbb;
+  }
+  .footer-tag {
+    position: absolute; bottom: 3mm; right: 6mm;
+    font-size: 8pt; color: #ddd;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <span class="corner">____.____ W#____</span>
+  <span class="footer-tag">quadrant-paper-system</span>
+  
+  <div class="q">
+    <h2>🧠 My Rules</h2>
+    <div class="lines">
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+    </div>
+  </div>
+  
+  <div class="q">
+    <h2>⏳ Waiting On</h2>
+    <div class="lines">
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+    </div>
+  </div>
+  
+  <div class="q">
+    <h2>🎯 This Week (3)</h2>
+    <div class="lines">
+      <div class="line num"></div>
+      <div class="line num"></div>
+      <div class="line num"></div>
+      <div class="line" style="border:none; height:4mm;"></div>
+      <div class="line bullet" style="color:#bbb;">Notes:</div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+    </div>
+  </div>
+  
+  <div class="q">
+    <h2>💡 Idea Parking</h2>
+    <div class="lines">
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+      <div class="line bullet"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

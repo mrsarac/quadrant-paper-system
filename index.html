@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quadrant Paper System — A Physical Productivity Framework</title>
+<meta name="description" content="A physical productivity framework. One pen. One paper. Four quadrants. Your brain stays clear.">
+<meta property="og:title" content="Quadrant Paper System">
+<meta property="og:description" content="Fold an A4 paper into 4 quadrants. Write. Think. Execute.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mrsarac.github.io/quadrant-paper-system/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Inter:wght@300;400;600&display=swap');
+  
+  :root {
+    --bg: #2c2420;
+    --paper: #fefcf8;
+    --paper-line: #e8e4dd;
+    --ink: #4a3f35;
+    --ink-light: #5a4f45;
+    --accent: #8b7355;
+    --text-light: #f5e6d3;
+    --text-muted: #a89080;
+    --divider: #c5bdb0;
+    --green: #4a8b5a;
+    --orange: #b08040;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background: var(--bg);
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  
+  /* HEADER */
+  h1 {
+    font-family: 'Caveat', cursive;
+    color: var(--text-light);
+    font-size: 2.5em;
+    margin-bottom: 8px;
+  }
+  
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  .tagline {
+    color: var(--text-muted);
+    font-size: 0.85em;
+    margin-bottom: 40px;
+    max-width: 600px;
+    text-align: center;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  
+  /* DESK LAYOUT */
+  .desk {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+  }
+  
+  .paper-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .paper-label {
+    font-family: 'Caveat', cursive;
+    color: var(--text-light);
+    font-size: 1.3em;
+  }
+  
+  .paper-desc {
+    color: var(--text-muted);
+    font-size: 0.75em;
+    max-width: 400px;
+    text-align: center;
+    margin-top: -4px;
+    margin-bottom: 4px;
+  }
+  
+  /* PAPER */
+  .paper {
+    width: 520px;
+    background: var(--paper);
+    border-radius: 3px;
+    box-shadow: 4px 6px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .paper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 27px, var(--paper-line) 27px, var(--paper-line) 28px
+    );
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  
+  .date-tag {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-family: 'Caveat', cursive;
+    font-size: 1em;
+    color: var(--accent);
+    z-index: 2;
+  }
+  
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    min-height: 580px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .grid::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 5%; right: 5%;
+    height: 1px;
+    background: var(--divider);
+  }
+  
+  .grid::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 5%; bottom: 5%;
+    width: 1px;
+    background: var(--divider);
+  }
+  
+  .quadrant { padding: 20px 18px; }
+  
+  .q-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .q-emoji { font-size: 1.2em; }
+  
+  .q-title {
+    font-family: 'Caveat', cursive;
+    font-size: 1.2em;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  
+  .q-items {
+    list-style: none;
+    font-family: 'Caveat', cursive;
+    font-size: 1.05em;
+    color: var(--ink-light);
+    line-height: 1.8;
+  }
+  
+  .q-items li { padding-left: 4px; }
+  .q-items .bullet::before { content: '• '; color: var(--accent); }
+  .q-items .check::before { content: '☐ '; color: var(--accent); }
+  .q-items .checked::before { content: '☑ '; color: var(--green); }
+  .q-items .arrow::before { content: '→ '; color: var(--orange); }
+  .q-items .circle::before { content: '⭕ '; font-size: 0.7em; }
+  .q-items .num { color: var(--accent); font-weight: 600; }
+  
+  /* INFO CARDS */
+  .cards {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+    max-width: 1100px;
+  }
+  
+  .card {
+    background: rgba(254,252,248,0.08);
+    border: 1px solid rgba(254,252,248,0.1);
+    border-radius: 12px;
+    padding: 24px 28px;
+    color: #d4c4b0;
+    flex: 1;
+    min-width: 280px;
+    max-width: 340px;
+  }
+  
+  .card h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.4em;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+    font-size: 0.9em;
+  }
+  
+  .card-item { display: flex; align-items: center; gap: 8px; }
+  .card-symbol { font-size: 1.1em; width: 24px; text-align: center; }
+  
+  .card ol {
+    padding-left: 20px;
+    line-height: 2;
+    font-size: 0.9em;
+  }
+  
+  .card ul {
+    list-style: none;
+    line-height: 2;
+    font-size: 0.9em;
+  }
+  
+  .card ul li::before { content: '→ '; color: var(--orange); }
+  
+  /* FOOTER */
+  .footer {
+    margin-top: 48px;
+    color: var(--text-muted);
+    font-size: 0.75em;
+    text-align: center;
+    line-height: 1.8;
+  }
+  
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+  
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .paper { width: 100%; }
+    h1 { font-size: 1.8em; }
+    .desk { gap: 30px; }
+    .grid { min-height: 480px; }
+    .quadrant { padding: 14px 12px; }
+    .q-items { font-size: 0.95em; }
+  }
+</style>
+</head>
+<body>
+
+<h1>📋 Quadrant Paper System</h1>
+<p class="subtitle">A Physical Productivity Framework</p>
+<p class="tagline">
+  Fold an A4 paper into 4 quadrants. Write. Think. Execute.<br>
+  Your brain stays clear. Your desk tells you what to do.
+</p>
+
+<div class="desk">
+  <!-- WEEKLY PAPER -->
+  <div class="paper-wrapper">
+    <span class="paper-label">📌 Weekly Paper</span>
+    <p class="paper-desc">Stays on your desk all week. Your compass.</p>
+    <div class="paper">
+      <span class="date-tag">W#8</span>
+      <div class="grid">
+        <div class="quadrant">
+          <div class="q-header">
+            <span class="q-emoji">🧠</span>
+            <span class="q-title">My Rules</span>
+          </div>
+          <ul class="q-items">
+            <li class="bullet">5 Minute Rule — just start</li>
+            <li class="bullet">1min pause before any command</li>
+            <li class="bullet">Write it down first!</li>
+            <li class="bullet">MAX 3 active projects</li>
+            <li class="bullet">No coding after midnight</li>
+          </ul>
+        </div>
+        
+        <div class="quadrant">
+          <div class="q-header">
+            <span class="q-emoji">⏳</span>
+            <span class="q-title">Waiting On</span>
+          </div>
+          <ul class="q-items">
+            <li class="bullet">Client proposal response</li>
+            <li class="bullet">Tax registration</li>
+            <li class="bullet">Bank verification</li>
+            <li class="bullet">Design review feedback</li>
+          </ul>
+        </div>
+        
+        <div class="quadrant">
+          <div class="q-header">
+            <span class="q-emoji">🎯</span>
+            <span class="q-title">This Week (3)</span>
+          </div>
+          <ul class="q-items">
+            <li><span class="num">1.</span> Ship landing page</li>
+            <li><span class="num">2.</span> API integration</li>
+            <li><span class="num">3.</span> Invoice & admin</li>
+          </ul>
+        </div>
+        
+        <div class="quadrant">
+          <div class="q-header">
+            <span class="q-emoji">💡</span>
+            <span class="q-title">Idea Parking</span>
+          </div>
+          <ul class="q-items">
+            <li class="bullet">Blog series concept</li>
+            <li class="bullet">Open source tool idea</li>
+            <li class="bullet">Redesign portfolio</li>
+            <li class="bullet">Conference talk topic</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAILY PAPER -->
+  <div class="paper-wrapper">
+    <span class="paper-label">📝 Daily Paper</span>
+    <p class="paper-desc">Fresh every morning. Your daily cockpit.</p>
+    <div class="paper">
+      <span class="date-tag">D#1</span>
+      <div class="grid">
+        <div class="quadrant">
+          <div class="q-header">
+            <span class="q-emoji">☐</span>
+            <span class="q-title">Today</span>
+          </div>
+          <ul class="q-items">
+            <li class="checked">Review pull requests</li>
+            <li class="checked">Fix auth bug</li>
+            <li class="check">Deploy staging</li>
+            <li class="check">Write docs</li>
+            <li class="circle">Client call 3pm</li>
+          </ul>
+        </div>
+        
+        <div class="quadrant">
+          <div class="q-header">
+            <span class="q-emoji">✏️</span>
+            <span class="q-title">Notes</span>
+          </div>
+          <ul class="q-items">
+            <li class="bullet">Redis cache solved latency</li>
+            <li class="bullet">New API rate limit: 100/min</li>
+            <li class="bullet">Team prefers Tailwind</li>
+          </ul>
+        </div>
+        
+        <div class="quadrant">
+          <div class="q-header">
+            <span class="q-emoji">📞</span>
+            <span class="q-title">Communication</span>
+          </div>
+          <ul class="q-items">
+            <li class="checked">Reply to designer</li>
+            <li class="check">Schedule team sync</li>
+            <li class="arrow">Follow up with accountant</li>
+          </ul>
+        </div>
+        
+        <div class="quadrant">
+          <div class="q-header">
+            <span class="q-emoji">🔥</span>
+            <span class="q-title">Learned Today</span>
+          </div>
+          <ul class="q-items">
+            <li class="bullet">Batch API calls = 3x faster</li>
+            <li class="bullet">Plan before you spam</li>
+            <li class="bullet">Paper > apps for focus</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INFO CARDS -->
+<div class="cards">
+  <div class="card">
+    <h3>✍️ Mark System</h3>
+    <div class="card-grid">
+      <div class="card-item"><span class="card-symbol">☐</span> To do</div>
+      <div class="card-item"><span class="card-symbol">☑</span> Done</div>
+      <div class="card-item"><span class="card-symbol">→</span> Moved to tomorrow</div>
+      <div class="card-item"><span class="card-symbol">✕</span> Cancelled</div>
+      <div class="card-item"><span class="card-symbol">⭕</span> Urgent</div>
+      <div class="card-item"><span class="card-symbol">•</span> Note / info</div>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h3>🌅 End of Day Ritual</h3>
+    <ol>
+      <li>Look at your paper</li>
+      <li>Mark done items ☑</li>
+      <li>Move unfinished → tomorrow</li>
+      <li>Snap a photo (archive)</li>
+      <li>Fresh paper tomorrow</li>
+    </ol>
+  </div>
+  
+  <div class="card">
+    <h3>💡 Why It Works</h3>
+    <ul>
+      <li>Brain dump → mental load drops</li>
+      <li>Physical = zero distraction</li>
+      <li>4 quadrants = one glance overview</li>
+      <li>Handwriting = stronger memory</li>
+      <li>Always on your desk, no app needed</li>
+    </ul>
+  </div>
+</div>
+
+<!-- HOW TO USE -->
+<div class="cards" style="margin-top: 48px;">
+  <div class="card" style="max-width: 700px; flex: unset;">
+    <h3>📖 How to Start</h3>
+    <ol>
+      <li><strong>Grab an A4 paper.</strong> Fold it in half twice. Open it. Four quadrants.</li>
+      <li><strong>Weekly paper (Monday):</strong> Write your rules, what you're waiting on, 3 priorities, and parked ideas.</li>
+      <li><strong>Daily paper (every morning):</strong> Write today's tasks, notes, people to contact, and leave space for what you learn.</li>
+      <li><strong>Work.</strong> Glance at your paper. Check things off. Scribble notes.</li>
+      <li><strong>End of day (2 min):</strong> Mark done ☑, move unfinished →, snap a photo, trash the paper.</li>
+      <li><strong>Repeat.</strong> That's it. No app. No subscription. No sync issues.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- PRINT BUTTON -->
+<div style="margin-top: 32px;">
+  <button onclick="window.print()" style="
+    background: rgba(254,252,248,0.1);
+    border: 1px solid rgba(254,252,248,0.2);
+    color: #f5e6d3;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.2s;
+  " onmouseover="this.style.background='rgba(254,252,248,0.2)'" onmouseout="this.style.background='rgba(254,252,248,0.1)'">
+    🖨️ Print This Template
+  </button>
+</div>
+
+<div class="footer">
+  <strong>Quadrant Paper System</strong> — Created by <a href="https://github.com/mrsarac">Mustafa Saraç</a><br>
+  All you need is a pen and paper. The simplest tools are often the most powerful.<br><br>
+  <a href="https://github.com/mrsarac/quadrant-paper-system">GitHub</a> · MIT License
+</div>
+
+</body>
+</html>
