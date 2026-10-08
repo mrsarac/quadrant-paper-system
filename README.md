@@ -2,235 +2,174 @@
   <img src="assets/logo.svg" width="120" alt="Quadrant Paper System" />
 </p>
 
-<h1 align="center">Quadrant Paper System</h1>
+# Quadrant Paper System
 
-<p align="center">
-  <strong>A physical productivity framework. One pen. One paper. Four quadrants.</strong>
-</p>
+A pen-and-paper planning method: fold an A4 sheet into four quadrants and keep one weekly and one daily page.
 
-<p align="center">
-  <a href="https://mrsarac.github.io/quadrant-paper-system/">Live Demo</a> ·
-  <a href="#print-template">Print Template</a> ·
-  <a href="#the-method">The Method</a> ·
-  <a href="#why-paper-beats-apps">Why Paper?</a>
-</p>
+[![license](https://img.shields.io/github/license/mrsarac/quadrant-paper-system)](LICENSE)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/tools-pen_%26_paper-8b7355?style=flat-square" />
-  <img src="https://img.shields.io/badge/cost-%240-4a8b5a?style=flat-square" />
-  <img src="https://img.shields.io/badge/battery-∞-b08040?style=flat-square" />
-  <img src="https://img.shields.io/badge/distractions-0-c45050?style=flat-square" />
-  <img src="https://img.shields.io/github/license/mrsarac/quadrant-paper-system?style=flat-square&color=8b7355" />
-</p>
+Live page: <https://mrsarac.github.io/quadrant-paper-system/>
 
----
+![Weekly and daily paper example from index.html](docs/screenshot.png)
 
-## The Problem
+## Why
 
-You have 30 tabs open, 5 todo apps installed, and your brain is running at 100% CPU trying to remember everything. Sound familiar?
+Keeping open tasks and half-formed ideas in your head is tiring, and a todo app adds its own overhead (logins, notifications, another window). This method moves everything onto paper that sits on your desk, with a fixed layout so each kind of item has an obvious place.
 
-**Keeping thoughts in your head is expensive.** Every unwritten task, every half-formed idea, every "I should remember to..." costs you mental energy. Not a lot individually. But compounded across a workday? You're exhausted before lunch.
+It came out of the author's own daily use. It is not based on a book or course.
 
-> *"I was drowning in 30+ projects. My brain couldn't hold it all. Then I folded a piece of paper into four and everything changed."*
+## Quick start
 
-## The Method
+1. Take an A4 sheet and fold it in half twice. That gives four quadrants.
+2. Make a **weekly paper** and a **daily paper** using the layouts below.
+3. Mark items with the one-stroke marks, and run the two-minute end-of-day ritual.
 
-Grab an A4 paper. Fold it in half twice. You now have four quadrants. That's your entire system.
+Printable guides are in this repo. Open one in a browser and print it on A4 (`Ctrl+P` / `Cmd+P`):
 
-You use **two papers**:
+- `templates/print-weekly.html` — weekly paper
+- `templates/print-daily.html` — daily paper
 
-### 📌 Weekly Paper — Your Compass
+`index.html` is the visual overview shown in the screenshot; open it locally or use the live page. All three files are plain HTML with no build step (they load the Caveat font from Google Fonts).
 
-Stays on your desk all week. Rewrite every Monday morning.
+## How it works
+
+### Weekly paper
+
+Stays on your desk all week. Rewrite it every Monday.
 
 ```
-┌─────────────────────────┬─────────────────────────┐
-│                         │                         │
-│  🧠 MY RULES            │  ⏳ WAITING ON           │
-│                         │                         │
-│  • 5 Minute Rule        │  • Client proposal      │
-│  • Pause before acting  │  • Tax registration     │
-│  • Write it down first  │  • Bank verification    │
-│  • MAX 3 active projects│  • Design feedback      │
-│  • No code after midnight│                        │
-│                         │                         │
-├─────────────────────────┼─────────────────────────┤
-│                         │                         │
-│  🎯 THIS WEEK (3)       │  💡 IDEA PARKING         │
-│                         │                         │
-│  1. Ship landing page   │  • Blog series concept  │
-│  2. API integration     │  • Open source tool     │
-│  3. Invoice & admin     │  • Redesign portfolio   │
-│                         │  • Conference talk      │
-│                         │                         │
-└─────────────────────────┴─────────────────────────┘
++---------------------------+---------------------------+
+| MY RULES                  | WAITING ON                |
+|                           |                           |
+| - 5 minute rule           | - Client proposal         |
+| - Pause before acting     | - Tax registration        |
+| - Write it down first     | - Bank verification       |
+| - Max 3 active projects   | - Design feedback         |
++---------------------------+---------------------------+
+| THIS WEEK (3)             | IDEA PARKING              |
+|                           |                           |
+| 1. Ship landing page      | - Blog series concept     |
+| 2. API integration        | - Open source tool        |
+| 3. Invoice & admin        | - Redesign portfolio      |
++---------------------------+---------------------------+
 ```
 
 | Quadrant | What goes here | Why |
 |:---------|:---------------|:----|
-| 🧠 **My Rules** | Personal principles, habits | Keeps your standards visible |
-| ⏳ **Waiting On** | Blocked items, others' tasks | Stops you from worrying about them |
-| 🎯 **This Week (3)** | MAX 3 priorities | Forces focus. If everything is priority, nothing is |
-| 💡 **Idea Parking** | Future ideas, not-now items | Captures without distracting |
+| **My Rules** | Personal principles, habits | Keeps your standards visible |
+| **Waiting On** | Blocked items, other people's tasks | You can stop tracking them in your head |
+| **This Week (3)** | At most 3 priorities | Forces a choice |
+| **Idea Parking** | Future ideas, not-now items | Captured without becoming today's work |
 
-### 📝 Daily Paper — Your Cockpit
+### Daily paper
 
-Fresh every morning. Gone by evening.
+A fresh sheet every morning.
 
 ```
-┌─────────────────────────┬─────────────────────────┐
-│                         │                         │
-│  ☐ TODAY                │  ✏️ NOTES               │
-│                         │                         │
-│  ☑ Review pull requests │  • Redis fixed latency  │
-│  ☑ Fix auth bug         │  • Rate limit: 100/min  │
-│  ☐ Deploy staging       │  • Team prefers Tailwind│
-│  ☐ Write docs           │                         │
-│  ⭕ Client call 3pm     │                         │
-│                         │                         │
-├─────────────────────────┼─────────────────────────┤
-│                         │                         │
-│  📞 COMMUNICATION       │  🔥 LEARNED TODAY        │
-│                         │                         │
-│  ☑ Reply to designer    │  • Batch calls = 3x     │
-│  ☐ Schedule team sync   │  • Plan before you spam │
-│  → Follow up accountant │  • Paper > apps         │
-│                         │                         │
-└─────────────────────────┴─────────────────────────┘
++---------------------------+---------------------------+
+| TODAY                     | NOTES                     |
+|                           |                           |
+| [x] Review pull requests  | - Redis fixed latency     |
+| [x] Fix auth bug          | - Team prefers Tailwind   |
+| [ ] Deploy staging        |                           |
+| (!) Client call 3pm       |                           |
++---------------------------+---------------------------+
+| COMMUNICATION             | LEARNED TODAY             |
+|                           |                           |
+| [x] Reply to designer     | - Batch similar calls     |
+| [ ] Schedule team sync    | - Plan before you start   |
+| ->  Follow up accountant  |                           |
++---------------------------+---------------------------+
 ```
 
 | Quadrant | What goes here | Why |
 |:---------|:---------------|:----|
-| ☐ **Today** | Tasks with checkboxes | Clear, binary: done or not |
-| ✏️ **Notes** | Observations, context, data | Capture without losing focus |
-| 📞 **Communication** | People to reach, replies | Social tasks need their own space |
-| 🔥 **Learned Today** | Insights, lessons, aha moments | Compound knowledge over time |
+| **Today** | Tasks with checkboxes | Done or not, nothing in between |
+| **Notes** | Observations, context, data | Capture without switching tools |
+| **Communication** | People to reach, replies owed | Calls and messages get their own list |
+| **Learned Today** | Insights, lessons | Easy to review at the end of the week |
 
-## Mark System
+### Marks
 
-One-stroke status changes. No apps, no dropdowns, no clicking.
-
-```
-☐   To do          — Empty box, waiting
-☑   Done           — Check it off, dopamine hit
-→   Tomorrow       — Not today, carry forward
-✕   Cancelled      — Not needed anymore
-⭕  Urgent         — Do this first
-•   Note           — Information, not action
-```
-
-## Corner Tag
-
-Every paper gets stamped for sorting:
+One stroke changes an item's status:
 
 ```
-23.02 W#8     Weekly paper, week 8
-23.02 D#1     Daily paper, day 1
+☐   To do
+☑   Done
+→   Carry to tomorrow
+✕   Cancelled
+⭕  Urgent, do first
+•   Note (information, not an action)
 ```
 
-When you stack papers at the end of the week, you can find anything.
+### Corner tag
 
-## End of Day Ritual
-
-Two minutes. Every day. Non-negotiable.
+Write a date and sheet tag in the corner so a stack of pages stays sortable:
 
 ```
-1. Look at your paper
-2. Mark done items ☑
-3. Unfinished items get → (carry to tomorrow)
-4. Snap a photo for your archive
-5. Tomorrow: fresh paper
+23.02 W#8     weekly paper, week 8
+23.02 D#1     daily paper, day 1
 ```
 
-The photo archive is your safety net. Paper is the tool. The photo is insurance.
+### End-of-day ritual
 
-## Why Paper Beats Apps
+About two minutes:
 
-| | Paper | Apps |
+1. Look at the paper.
+2. Mark finished items ☑.
+3. Mark unfinished items → so they move to tomorrow.
+4. Take a photo of the page for your archive.
+5. Start tomorrow with a fresh sheet.
+
+The paper is the tool; the photo is the backup and makes old pages searchable.
+
+### Habits that go with it
+
+- **Max 3.** Never more than three items in "This Week". Park the rest.
+- **5-minute rule.** If you are avoiding a task, commit to five minutes of it.
+- **1-minute pause.** Before sending a message or running a command, stop for a minute and think.
+- **Keep it messy.** Arrows, circles and scribbles are fine. It is a thinking tool, not a presentation.
+- **Monday rewrite.** Rewrite the weekly paper from memory rather than copying last week's.
+
+### Adapting the labels
+
+The quadrant labels are suggestions. The system is the four quadrants plus the daily ritual. Examples:
+
+| Who | Quadrants |
+|:----|:----------|
+| Students | Study tasks · Deadlines · Ask the professor · Key concepts |
+| Managers | Team tasks · Blockers · Metrics · Strategy |
+| Creators | Create · Publish · Research · Business |
+
+The layout borrows the 2x2 shape of the Eisenhower matrix, but the quadrants are not urgent/important buckets. They separate kinds of thinking: rules, waiting, focus and ideas.
+
+### Paper vs. apps
+
+| | Paper | App |
 |:--|:--|:--|
-| **Boot time** | 0 seconds | Open, login, navigate, load... |
-| **Distractions** | Zero | Notifications, tabs, feeds |
-| **Visibility** | Always on your desk | Hidden behind 47 windows |
-| **Memory** | Handwriting = stronger encoding | Typing = weaker retention |
-| **Battery** | ∞ | 🪫 |
-| **Cost** | ~$0 | $5-15/month |
-| **Setup** | Fold paper | Create account, configure, sync... |
+| Start-up | Pick up the pen | Open, log in, navigate |
+| Notifications | None | Usually some |
+| Visibility | On the desk | In a window or tab |
+| Cost | A sheet of paper | Often a subscription |
+| Setup | Fold the sheet | Account, configuration, sync |
 
-### Research backs this up
+Related research, for context rather than proof that this method works:
 
-- **Mueller & Oppenheimer (2014)** — Handwriting notes leads to better conceptual understanding than typing ([study](https://doi.org/10.1177/0956797614524581))
-- **Umejima et al. (2021)** — Writing on paper activates more brain regions than digital input ([study](https://doi.org/10.3389/fnbeh.2021.634158))
-- **Zeigarnik Effect** — Unfinished tasks occupy mental space until externalized (written down)
+- Mueller & Oppenheimer (2014) found students taking notes by hand did better on conceptual questions than laptop note-takers ([doi:10.1177/0956797614524581](https://doi.org/10.1177/0956797614524581)). Later replications have been mixed.
+- Umejima et al. (2021) reported higher brain activation during recall for people who had written in a paper notebook versus on mobile devices ([doi:10.3389/fnbeh.2021.634158](https://doi.org/10.3389/fnbeh.2021.634158)).
+- The Zeigarnik effect describes unfinished tasks staying more present in memory; writing a task down is a common way to set it aside.
 
-## Tips & Principles
+## Status / limits
 
-### 🎯 The MAX 3 Rule
-Never put more than 3 items in "This Week." If you have 7 priorities, you have zero priorities. Pick three. Park the rest.
-
-### ⏱️ The 5 Minute Rule
-Don't want to start something? Commit to just 5 minutes. Momentum usually takes over. If it doesn't, the task wasn't important today.
-
-### 🧘 The 1 Minute Pause
-Before executing any command, decision, or message — pause for 60 seconds. Think. Then act. Prevents 80% of mistakes.
-
-### 📸 Photo Archive
-Snap your daily paper at end of day. Over weeks, you build a searchable visual journal. Some people use AI to transcribe and analyze their papers weekly.
-
-### ✍️ Keep It Messy
-Perfection kills momentum. Scribble, draw arrows, circle things. The paper is a thinking tool, not a presentation. If it looks clean, you're not using it enough.
-
-### 🔄 The Monday Rewrite
-Every Monday, fresh weekly paper. Don't copy-paste from last week — rewrite from memory. What you remember is what matters. What you forgot probably doesn't.
-
-## Live Demo
-
-Open `index.html` in your browser or visit the [GitHub Pages demo](https://mrsarac.github.io/quadrant-paper-system/) to see an interactive visual template.
-
-## Print Template
-
-Download and print `templates/weekly.pdf` and `templates/daily.pdf` for pre-folded quadrant guides. Or just fold a blank A4 — that works too.
-
-## Adapting the System
-
-The quadrant labels above are suggestions. Adapt them to your life:
-
-**For students:**
-| 📚 Study Tasks | 📅 Deadlines |
-|:--|:--|
-| **💬 Ask Professor** | **🧠 Key Concepts** |
-
-**For managers:**
-| 👥 Team Tasks | 🚧 Blockers |
-|:--|:--|
-| **📊 Metrics** | **💡 Strategy** |
-
-**For creators:**
-| 🎨 Create | 📣 Publish |
-|:--|:--|
-| **🔍 Research** | **💰 Business** |
-
-The system is the quadrants + the ritual. The labels are yours.
-
-## Origin
-
-Born from real daily use by a developer managing 30+ projects across multiple machines. Not from a book, not from a course — from desperation and iteration.
-
-The quadrant format draws inspiration from the Eisenhower Matrix but diverges significantly: these aren't "urgent/important" buckets. They're **cognitive spaces** — places where different types of thinking live. Rules need a different headspace than tasks. Ideas need freedom that schedules don't allow.
+- This is a personal method shared as-is. It has not been studied or measured.
+- The repo contains static HTML only: `index.html`, two print templates and assets. There is no app, sync or data storage.
+- The print templates are tuned for A4; other paper sizes are untested.
+- There are no PDF versions of the templates; print the HTML files instead.
 
 ## Contributing
 
-Found a better quadrant layout? Adapted it for your profession? Open a PR or issue. This is a living system.
+Found a better quadrant layout or adapted it for your work? Open an issue or a pull request.
 
 ## License
 
-MIT — Use it, adapt it, share it, print it, teach it.
-
----
-
-<p align="center">
-  <em>All you need is a pen and paper.<br>The simplest tools are often the most powerful.</em>
-</p>
-
-<p align="center">
-  Created by <a href="https://github.com/mrsarac">Mustafa Saraç</a>
-</p>
+[MIT](LICENSE) © 2026 Mustafa Saraç
